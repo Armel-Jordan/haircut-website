@@ -1,0 +1,39 @@
+.hero {
+  height: 100vh;
+  background-color: #8B4513;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  background-size: cover;
+  position: relative;
+
+  &__content {
+    max-width: 600px;
+    color: white;
+    z-index: 1;
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__cta {
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    background: #B22222;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    
+    &:hover {
+      background: darken(#B22222, 10%);
+    }
+  }
+}
