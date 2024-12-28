@@ -51,4 +51,17 @@
     margin: 0;
     color: #666;
   }
+
+  /* Add to your main CSS or create a new file */
+.section-anchor {
+  position: relative;
+  top: -80px; /* Adjust this value based on your navbar height */
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adjust this value based on your navbar height */
+}
 }

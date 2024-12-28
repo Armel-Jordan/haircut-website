@@ -6,17 +6,18 @@ const Team = () => {
     {
       name: 'Olivia Smith',
       role: 'Hairdresser',
-      image: '/path/to/olivia.jpg'
+      image: 'https://images.unsplash.com/photo-1593702288056-7927b442d0fa?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29pZmZldXJ8ZW58MHx8MHx8fDA%3D'
     },
     {
       name: 'Amelia Brown',
       role: 'Hairdresser',
-      image: '/path/to/amelia.jpg'
+      image: 'https://media.gettyimages.com/id/450272211/photo/woman-getting-curls-in-coiffeur-studio.jpg?s=612x612&w=gi&k=20&c=T9kGRJwz2XYm-Pq9LoCXG4mHFdywkiVqiNWq4lHkrWU='
     }
   ];
 
   return (
-    <section className="team">
+    <section className="team" id="team">
+      <div className="section-anchor" id="team-top"></div>
       <h2>Our Team</h2>
       <p>Entrust your locks to our team of skilled and creative stylists</p>
       <div className="team__grid">

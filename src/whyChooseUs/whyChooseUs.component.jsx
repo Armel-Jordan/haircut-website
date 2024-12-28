@@ -32,6 +32,7 @@ const WhyChooseUs = () => {
 
   return (
     <section className="why-choose-us">
+      <div className="section-anchor" id="why-choose-us-top"></div>
       <h2>Why Choose Us</h2>
       <div className="why-choose-us__stats">
         <div className="stat">
