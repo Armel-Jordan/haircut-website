@@ -31,29 +31,30 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="why-choose-us">
-      <div className="section-anchor" id="why-choose-us-top"></div>
-      <h2>Why Choose Us</h2>
-      <div className="why-choose-us__stats">
-        <div className="stat">
-          <h3>{stats.clients}</h3>
-          <p>Satisfied clients</p>
-        </div>
-        <div className="stat">
-          <h3>{stats.salons}</h3>
-          <p>Salons around the city</p>
-        </div>
-      </div>
-      <div className="why-choose-us__features">
-        {features.map((feature, index) => (
-          <div key={index} className="feature-card">
-            <span className="feature-card__icon">{feature.icon}</span>
-            <h3>{feature.title}</h3>
-            <p>{feature.description}</p>
+    <div className="section-anchor" id="why-choose-us-top">
+      <section className="why-choose-us">
+        <h2>Why Choose Us</h2>
+        <div className="why-choose-us__stats">
+          <div className="stat">
+            <h3>{stats.clients}</h3>
+            <p>Satisfied clients</p>
           </div>
-        ))}
-      </div>
-    </section>
+          <div className="stat">
+            <h3>{stats.salons}</h3>
+            <p>Salons around the city</p>
+          </div>
+        </div>
+        <div className="why-choose-us__features">
+          {features.map((feature, index) => (
+            <div key={index} className="feature-card">
+              <span className="feature-card__icon">{feature.icon}</span>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 };
 

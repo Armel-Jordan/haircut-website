@@ -57,42 +57,43 @@ const Produits = () => {
   const visibleProducts = products.slice(startIndex, startIndex + productsPerPage);
 
   return (
-    <section className="products" id="products">
-      <div className="section-anchor" id="products-top"></div>
-      <h2>Our products</h2>
-      <p>Experience the difference with top-tier products that enhance both the aesthetics and health of your hair.</p>
-      
-      <div className="products__container">
-        <button 
-          className="products__arrow products__arrow--left"
-          onClick={handlePrevious}
-          disabled={startIndex === 0}
-        >
-          &#8592;
-        </button>
+    <div className="section-anchor" id="products-top">
+      <section className="products" id="products">
+        <h2>Our products</h2>
+        <p>Experience the difference with top-tier products that enhance both the aesthetics and health of your hair.</p>
+        
+        <div className="products__container">
+          <button 
+            className="products__arrow products__arrow--left"
+            onClick={handlePrevious}
+            disabled={startIndex === 0}
+          >
+            &#8592;
+          </button>
 
-        <div className="products__grid">
-          {visibleProducts.map(product => (
-            <div key={product.id} className="product-card">
-              <div className="product-card__image">
-                <img src={product.image} alt={product.name} />
+          <div className="products__grid">
+            {visibleProducts.map(product => (
+              <div key={product.id} className="product-card">
+                <div className="product-card__image">
+                  <img src={product.image} alt={product.name} />
+                </div>
+                <h3>{product.name}</h3>
+                <p>${product.price}</p>
+                <button className="product-card__cart">Add to Cart</button>
               </div>
-              <h3>{product.name}</h3>
-              <p>${product.price}</p>
-              <button className="product-card__cart">Add to Cart</button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <button 
-          className="products__arrow products__arrow--right"
-          onClick={handleNext}
-          disabled={startIndex >= maxStartIndex}
-        >
-          &#8594;
-        </button>
-      </div>
-    </section>
+          <button 
+            className="products__arrow products__arrow--right"
+            onClick={handleNext}
+            disabled={startIndex >= maxStartIndex}
+          >
+            &#8594;
+          </button>
+        </div>
+      </section>
+    </div>
   );
 };
 

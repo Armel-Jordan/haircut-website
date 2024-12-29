@@ -1,11 +1,10 @@
 import React from 'react';
 import './footer.styles.scss';
-// import { Youtube, Facebook, Twitter, Instagram, Linkedin, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
   return (
+    <div className="section-anchor" id="contact-top">
     <footer className="footer" id="contact">
-      <div className="section-anchor" id="contact-top"></div>
       <div className="footer__content">
         <div className="footer__map">
           <iframe
@@ -36,57 +35,29 @@ const Footer = () => {
             <p>1-1565 boulevard Pere-Leliere</p>
             <p>G1M 1P2 QC</p>
           </div>
-
-          {/* <div className="footer__brand">
-            <h2 className="footer__logo">CYNDY</h2>
-            <button className="footer__cta">
-              Book Your Consultation
-            </button>
-          </div> */}
-
           <div className="footer__newsletter">
             <h3>Subscribe to the newsletter</h3>
             <div className="newsletter__form">
               <input type="email" placeholder="Email..." />
               <button type="submit">
                 Subscribe
-                {/* <ArrowRight size={20} /> */}
               </button>
             </div>
           </div>
         </div>
       </div>
-
       <div className="footer__bottom">
         <div className="footer__links">
           <a href="#sitemap">Sitemap</a>
           <a href="#privacy">Privacy Policy</a>
           <a href="#terms">Terms of Service</a>
         </div>
-        
-        {/* <div className="footer__social">
-          <a href="#youtube" aria-label="YouTube">
-            <Youtube size={20} />
-          </a>
-          <a href="#facebook" aria-label="Facebook">
-            <Facebook size={20} />
-          </a>
-          <a href="#twitter" aria-label="Twitter">
-            <Twitter size={20} />
-          </a>
-          <a href="#instagram" aria-label="Instagram">
-            <Instagram size={20} />
-          </a>
-          <a href="#linkedin" aria-label="LinkedIn">
-            <Linkedin size={20} />
-          </a>
-        </div> */}
-
         <p className="footer__copyright">
           Copyright © Cyndy. All Rights Reserved.
         </p>
       </div>
-    </footer>
+      </footer>
+    </div>
   );
 };
 
