@@ -6,7 +6,7 @@ interface Props {
   onSubmit: (data: BookingFormData) => void;
 }
 
-export const BookingForm = ({ onSubmit }: Props) => {
+ const BookingForm = ({ onSubmit }: Props) => {
   const [formData, setFormData] = useState<BookingFormData>({
     firstName: '',
     lastName: '',
@@ -92,3 +92,5 @@ export const BookingForm = ({ onSubmit }: Props) => {
     </form>
   );
 };
+
+export default BookingForm;

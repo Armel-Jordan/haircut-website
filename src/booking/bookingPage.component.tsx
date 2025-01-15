@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Calendar } from './calendar/calendar.component';
 import { TimeSlots } from './calendar/timeSlots.component';
-import { BookingForm } from './bookingForm/bookingForm.component';
+import BookingForm from './bookingForm/bookingForm.component';
 import { hairstyles } from './hairstyleList/hairstyles.component';
 import { TimeSlot, BookingFormData } from './types/index.component';
 
-export const BookingPage =() => {
+ const BookingPage =() => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const hairstyle = hairstyles.find(h => h.id === Number(id));

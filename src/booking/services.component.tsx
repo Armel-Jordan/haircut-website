@@ -1,8 +1,7 @@
 import React from 'react';
 import { HairstyleCard } from './hairstyleList/hairstyleCard.component';
 import { hairstyles } from './hairstyleList/hairstyles.component';
-
-export const Services = () => {
+ const Services = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4">
       <div className="max-w-6xl mx-auto">

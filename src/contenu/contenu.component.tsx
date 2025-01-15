@@ -9,8 +9,7 @@ const backgroundImages = [
   "https://images.unsplash.com/photo-1559599101-f09722fb4948?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
   "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
 ];
-
-export const Contenu = () => {  // Suppression du : FC
+ const Contenu = () => {  // Suppression du : FC
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "cra-template": "1.2.0",
+    "date-fns": "^4.1.0",
     "haircut-website": "file:",
     "lucide-react": "^0.469.0",
     "react": "^19.0.0",
@@ -39,6 +40,9 @@
   },
   "devDependencies": {
     "@types/date-fns": "^2.5.3",
-    "jest": "^27.5.1"
+    "@types/react": "^19.0.6",
+    "@types/react-dom": "^19.0.3",
+    "jest": "^27.5.1",
+    "typescript": "^4.9.5"
   }
 }
