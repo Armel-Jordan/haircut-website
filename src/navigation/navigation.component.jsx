@@ -20,8 +20,8 @@ const Navigation = () => {
         <div className="navbar__links">
           <a href="#home" onClick={(e) => handleNavClick(e, 'home')}>Home</a>
           <a href="#products" onClick={(e) => handleNavClick(e, 'products')}>Products</a>
-          <a href="#team" onClick={(e) => handleNavClick(e, 'team')}>Our team</a>
           <a href="#why-choose-us" onClick={(e) => handleNavClick(e, 'why-choose-us')}>Why Choose Us</a>
+          <a href="#team" onClick={(e) => handleNavClick(e, 'team')}>Our team</a>
         </div>
         <button 
           className="navbar__contact"

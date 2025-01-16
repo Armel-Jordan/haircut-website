@@ -1,31 +1,32 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Hairstyle } from '../types/index.component';
+import './hairstyle.card.styles.scss';
 
 interface Props {
   hairstyle: Hairstyle;
 }
 
-export const HairstyleCard = ({ hairstyle }) => {
+export const HairstyleCard = ({ hairstyle }: Props) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="hairstyle-card">
       <img 
         src={hairstyle.image} 
         alt={hairstyle.name}
-        className="w-full h-48 object-cover"
+        className="hairstyle-card__image"
       />
-      <div className="p-4">
-        <h3 className="text-xl font-semibold mb-2">{hairstyle.name}</h3>
-        <p className="text-gray-600 mb-2">{hairstyle.description}</p>
-        <div className="flex justify-between items-center">
-          <span className="text-lg font-bold">${hairstyle.price}</span>
-          <span className="text-sm text-gray-500">{hairstyle.duration} min</span>
+      <div className="hairstyle-card__content">
+        <h3 className="hairstyle-card__title">{hairstyle.name}</h3>
+        <p className="hairstyle-card__description">{hairstyle.description}</p>
+        <div className="hairstyle-card__details">
+          <span className="hairstyle-card__price">${hairstyle.price}</span>
+          <span className="hairstyle-card__duration">{hairstyle.duration} min</span>
         </div>
         <button
           onClick={() => navigate(`/booking/${hairstyle.id}`)}
-          className="mt-4 w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition-colors"
+          className="hairstyle-card__button"
         >
           Book Now
         </button>
