@@ -2,4 +2,36 @@
   font-family: Arial, sans-serif;
   line-height: 1.6;
   color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    > * {
+      margin: 0;
+      padding-top: 75px;
+
+      .team {
+        padding-top: 0; 
+      }
+    }
+
+   
+  }
+}
+
+// Reset global pour enlever les marges par défaut
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
