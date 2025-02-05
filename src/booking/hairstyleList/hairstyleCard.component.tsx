@@ -2,11 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Hairstyle } from '../types/index.component';
 
-interface Props {
-  hairstyle: Hairstyle;
-}
-
-export const HairstyleCard = ({ hairstyle }) => {
+export const HairstyleCard = ({ hairstyle }: { hairstyle: Hairstyle }) => {
   const navigate = useNavigate();
 
   return (

@@ -1,13 +1,15 @@
 import React from 'react';
 import { TimeSlot } from '../types/index.component';
 
-interface Props {
+export const TimeSlots = ({
+  slots,
+  selectedTime,
+  onTimeSelect
+}: {
   slots: TimeSlot[];
   selectedTime: string | null;
   onTimeSelect: (time: string) => void;
-}
-
-export const TimeSlots =({ slots, selectedTime, onTimeSelect }) => {
+}) => {
   return (
     <div className="grid grid-cols-3 gap-2">
       {slots.map((slot, index) => (

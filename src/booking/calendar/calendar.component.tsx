@@ -1,13 +1,15 @@
 import React from 'react';
 import { format, addDays, isBefore, startOfToday } from 'date-fns';
 
-interface Props {
+export const Calendar = ({ 
+  selectedDate, 
+  onDateSelect, 
+  unavailableDates = [] 
+}: {
   selectedDate: Date | null;
   onDateSelect: (date: Date) => void;
   unavailableDates?: Date[];
-}
-
-export const Calendar =({ selectedDate, onDateSelect, unavailableDates = [] }) => {
+}) => {
   const today = startOfToday();
   const dates = Array.from({ length: 14 }, (_, i) => addDays(today, i));
 

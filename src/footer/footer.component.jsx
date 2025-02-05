@@ -8,6 +8,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             <div className="h-96 rounded-lg overflow-hidden">
               <iframe
+                title="Localisation du salon de coiffure"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2728.8876811952395!2d-71.24772372346876!3d46.83402037123363!2m3!1f0!2f0!3f0!
                 3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb897d1119ee79d%3A0x27c810e1c1c32c25!2s1565%20Bd%20P%C3%A8re-
                 Leli%C3%A8vre%2C%20Quebec%20City%2C%20QC%20G1M%201P2!5e0!3m2!1sen!2sca!4v1709840000000!5m2!1sen!2sca"
