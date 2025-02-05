@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+
+  // Fonction pour détecter la section active lors du scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (location.pathname !== '/') return;
+
+      const sections = ['home', 'products', 'team', 'why-choose-us', 'contact'];
+      const scrollPosition = window.scrollY + 100; // Offset pour la navigation fixe
+
+      for (const section of sections) {
+        const element = document.getElementById(`${section}-top`);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [location.pathname]);
 
   const handleNavClick = (e, id) => {
     e.preventDefault();
+    setIsMenuOpen(false); // Fermer le menu mobile après un clic
     
-    // Si on n'est pas sur la page d'accueil, rediriger d'abord
     if (location.pathname !== '/') {
       navigate('/');
-      // Attendre que la navigation soit terminée avant de scroller
       setTimeout(() => {
         const element = document.getElementById(`${id}-top`);
         if (element) {
@@ -22,7 +49,6 @@ const Navigation = () => {
         }
       }, 100);
     } else {
-      // Si on est déjà sur la page d'accueil, juste scroller
       const element = document.getElementById(`${id}-top`);
       if (element) {
         element.scrollIntoView({ 
@@ -34,17 +60,23 @@ const Navigation = () => {
   };
 
   const handleLogoClick = () => {
-    // Si on est déjà sur la page d'accueil, scroll vers le haut
+    setIsMenuOpen(false); // Fermer le menu mobile après un clic
     if (location.pathname === '/') {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
     } else {
-      // Sinon, rediriger vers l'accueil
       navigate('/');
     }
   };
+
+  const navLinks = [
+    { id: 'home', label: 'Home' },
+    { id: 'products', label: 'Products' },
+    { id: 'team', label: 'Our team' },
+    { id: 'why-choose-us', label: 'Why Choose Us' }
+  ];
 
   return (
     <nav className="bg-white shadow-md fixed w-full z-50">
@@ -56,48 +88,100 @@ const Navigation = () => {
           >
             BEAUTY WOMAN
           </div>
+
+          {/* Menu pour écrans moyens et grands */}
           <div className="hidden md:flex space-x-8">
-            <a href="#home" 
-               onClick={(e) => {
-                 e.preventDefault();
-                 if (location.pathname === '/') {
-                   window.scrollTo({
-                     top: 0,
-                     behavior: 'smooth'
-                   });
-                 } else {
-                   navigate('/');
-                 }
-               }}
-               className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Home
-            </a>
-            <a href="#products" 
-               onClick={(e) => handleNavClick(e, 'products')}
-               className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Products
-            </a>
-            <a href="#team" 
-               onClick={(e) => handleNavClick(e, 'team')}
-               className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Our team
-            </a>
-            <a href="#why-choose-us" 
-               onClick={(e) => handleNavClick(e, 'why-choose-us')}
-               className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Why Choose Us
-            </a>
+            {navLinks.map(link => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => link.id === 'home' 
+                  ? (e.preventDefault(), location.pathname === '/' 
+                      ? window.scrollTo({ top: 0, behavior: 'smooth' }) 
+                      : navigate('/'))
+                  : handleNavClick(e, link.id)
+                }
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors
+                  ${activeSection === link.id 
+                    ? 'text-pink-600 hover:text-pink-700' 
+                    : 'text-gray-600 hover:text-gray-900'
+                  }
+                  ${location.pathname === '/' ? 'cursor-pointer' : ''}
+                `}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
+
+          {/* Bouton Contact */}
           <button 
-            className="bg-pink-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-pink-700 transition-colors"
+            className="hidden md:block bg-pink-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-pink-700 transition-colors"
             onClick={(e) => handleNavClick(e, 'contact')}
           >
             Contact Us
           </button>
+
+          {/* Bouton menu mobile */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
+
+        {/* Menu mobile */}
+        <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navLinks.map(link => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => link.id === 'home' 
+                  ? (e.preventDefault(), location.pathname === '/' 
+                      ? window.scrollTo({ top: 0, behavior: 'smooth' }) 
+                      : navigate('/'))
+                  : handleNavClick(e, link.id)
+                }
+                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors
+                  ${activeSection === link.id 
+                    ? 'text-pink-600 bg-gray-50' 
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  }
+                `}
+              >
+                {link.label}
+              </a>
+            ))}
+            <button 
+              className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-pink-600 hover:bg-pink-700 transition-colors"
+              onClick={(e) => handleNavClick(e, 'contact')}
+            >
+              Contact Us
+            </button>
+          </div>
         </div>
       </div>
     </nav>
