@@ -5,6 +5,7 @@
   "dependencies": {
     "cra-template": "1.2.0",
     "date-fns": "^4.1.0",
+    "firebase": "^11.2.0",
     "haircut-website": "file:",
     "lucide-react": "^0.469.0",
     "react": "^19.0.0",
