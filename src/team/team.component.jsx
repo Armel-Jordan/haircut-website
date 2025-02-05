@@ -1,5 +1,4 @@
 import React from 'react';
-import './team.styles.scss';
 
 const Team = () => {
   const teamMembers = [
@@ -16,20 +15,34 @@ const Team = () => {
   ];
 
   return (
-    <div className="section-anchor" id="team-top">
-      <section className="team" id="team">
-        <h2>Our Team</h2>
-        <p>Entrust your locks to our team of skilled and creative stylists</p>
-        <div className="team__grid">
-          {teamMembers.map((member, index) => (
-            <div key={index} className="team-card">
-              <img src={member.image} alt={member.name} />
-              <h3>{member.name}</h3>
-              <p>{member.role}</p>
-            </div>
-          ))}
+    <div className="scroll-mt-16" id="team-top">
+      <section className="py-16 bg-gray-50" id="team">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Our Team</h2>
+          <p className="text-xl text-center text-gray-600 mb-12">
+            Entrust your locks to our team of skilled and creative stylists
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {teamMembers.map((member, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <img 
+                  src={member.image} 
+                  alt={member.name}
+                  className="w-full h-64 object-cover object-center"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
+                  <p className="text-gray-600">{member.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <button className="bg-pink-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-pink-700 transition-colors">
+              Join the team
+            </button>
+          </div>
         </div>
-        <button className="team__join">Join the team</button>
       </section>
     </div>
   );
