@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.3",
     "cra-template": "1.2.0",
     "date-fns": "^4.1.0",
     "firebase": "^11.2.0",
     "haircut-website": "file:",
+    "i18next": "^24.2.2",
     "lucide-react": "^0.469.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-i18next": "^15.4.0",
     "react-router-dom": "^6.28.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^1.0.1"

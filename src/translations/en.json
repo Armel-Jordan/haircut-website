@@ -1,0 +1,19 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "products": "Products",
+    "booking": "Booking",
+    "contact": "Contact",
+    "team": "Our Team",
+    "whyChooseUs": "Why Choose Us",
+    "beautyWoman": "BEAUTY WOMAN"
+  },
+  "booking": {
+    "title": "Book an Appointment",
+    "choose_service": "Choose your service",
+    "price": "Price",
+    "duration": "Duration",
+    "book_now": "Book Now"
+  }
+}

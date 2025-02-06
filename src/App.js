@@ -1,6 +1,7 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './translations/i18n';
 import Navigation from './navigation/navigation.component';
 import  Contenu  from './contenu/contenu.component';
 import Footer from './footer/footer.component';

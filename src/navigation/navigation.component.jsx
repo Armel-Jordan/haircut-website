@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from '../components/LanguageSelector';
 
 const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const { t } = useTranslation();
+
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+  };
 
   // Fonction pour détecter la section active lors du scroll
   useEffect(() => {
@@ -13,7 +24,7 @@ const Navigation = () => {
       if (location.pathname !== '/') return;
 
       const sections = ['home', 'products', 'team', 'why-choose-us', 'contact'];
-      const scrollPosition = window.scrollY + 100; // Offset pour la navigation fixe
+      const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
         const element = document.getElementById(`${section}-top`);
@@ -35,7 +46,12 @@ const Navigation = () => {
 
   const handleNavClick = (e, id) => {
     e.preventDefault();
-    setIsMenuOpen(false); // Fermer le menu mobile après un clic
+    setIsMenuOpen(false);
+    
+    if (id === 'home') {
+      handleLogoClick();
+      return;
+    }
     
     if (location.pathname !== '/') {
       navigate('/');
@@ -59,129 +75,138 @@ const Navigation = () => {
     }
   };
 
-  const handleLogoClick = () => {
-    setIsMenuOpen(false); // Fermer le menu mobile après un clic
-    if (location.pathname === '/') {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    } else {
-      navigate('/');
-    }
-  };
-
   const navLinks = [
-    { id: 'home', label: 'Home' },
-    { id: 'products', label: 'Products' },
-    { id: 'team', label: 'Our team' },
-    { id: 'why-choose-us', label: 'Why Choose Us' }
+    { id: 'home', label: 'HOME' },
+    { id: 'products', label: t('products') },
+    { id: 'team', label: t('team') },
+    { id: 'why-choose-us', label: t('whyChooseUs') }
   ];
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-50">
+    <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div 
-            onClick={handleLogoClick}
-            className="text-2xl font-bold text-gray-800 cursor-pointer hover:text-gray-600 transition-colors"
-          >
-            BEAUTY WOMAN
-          </div>
-
-          {/* Menu pour écrans moyens et grands */}
-          <div className="hidden md:flex space-x-8">
-            {navLinks.map(link => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={(e) => link.id === 'home' 
-                  ? (e.preventDefault(), location.pathname === '/' 
-                      ? window.scrollTo({ top: 0, behavior: 'smooth' }) 
-                      : navigate('/'))
-                  : handleNavClick(e, link.id)
-                }
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors
-                  ${activeSection === link.id 
-                    ? 'text-pink-600 hover:text-pink-700' 
-                    : 'text-gray-600 hover:text-gray-900'
-                  }
-                  ${location.pathname === '/' ? 'cursor-pointer' : ''}
-                `}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Bouton Contact */}
-          <button 
-            className="hidden md:block bg-pink-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-pink-700 transition-colors"
-            onClick={(e) => handleNavClick(e, 'contact')}
-          >
-            Contact Us
-          </button>
-
-          {/* Bouton menu mobile */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <div 
+              className="text-2xl font-bold text-gray-800 cursor-pointer hover:text-gray-600 transition-colors"
+              onClick={handleLogoClick}
             >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
+              {t('BEAUTY WOMAN')}
+            </div>
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              {navLinks.map(link => (
+                <a
+                  key={link.id}
+                  href={`/#${link.id}-top`}
+                  onClick={(e) => handleNavClick(e, link.id)}
+                  className={`${
+                    activeSection === link.id
+                      ? 'border-rose-500 text-gray-900'
+                      : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="/services"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/services');
+                }}
+                className={`${
+                  location.pathname === '/services'
+                    ? 'border-rose-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                {t('services')}
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <LanguageSelector />
+            <button 
+              className="hidden md:block bg-pink-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-pink-700 transition-colors"
+              onClick={(e) => handleNavClick(e, 'contact')}
+            >
+              {t('contact')}
+            </button>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rose-500"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className={`${isMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M4 6h16M4 12h16M4 18h16"
                 />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Menu mobile */}
-        <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navLinks.map(link => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={(e) => link.id === 'home' 
-                  ? (e.preventDefault(), location.pathname === '/' 
-                      ? window.scrollTo({ top: 0, behavior: 'smooth' }) 
-                      : navigate('/'))
-                  : handleNavClick(e, link.id)
-                }
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors
-                  ${activeSection === link.id 
-                    ? 'text-pink-600 bg-gray-50' 
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                  }
-                `}
+              </svg>
+              <svg
+                className={`${isMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                {link.label}
-              </a>
-            ))}
-            <button 
-              className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-pink-600 hover:bg-pink-700 transition-colors"
-              onClick={(e) => handleNavClick(e, 'contact')}
-            >
-              Contact Us
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
             </button>
           </div>
+        </div>
+      </div>
+
+      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
+        <div className="pt-2 pb-3 space-y-1">
+          {navLinks.map(link => (
+            <a
+              key={link.id}
+              href={`/#${link.id}-top`}
+              onClick={(e) => handleNavClick(e, link.id)}
+              className={`${
+                activeSection === link.id
+                  ? 'bg-rose-50 border-rose-500 text-rose-700'
+                  : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
+              } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="/services"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/services');
+              setIsMenuOpen(false);
+            }}
+            className={`${
+              location.pathname === '/services'
+                ? 'bg-rose-50 border-rose-500 text-rose-700'
+                : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
+            } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+          >
+            {t('services')}
+          </a>
+          <button 
+            className="w-full text-left px-3 py-2 text-base font-medium text-white bg-pink-600 hover:bg-pink-700 transition-colors"
+            onClick={(e) => handleNavClick(e, 'contact')}
+          >
+            {t('contact')}
+          </button>
         </div>
       </div>
     </nav>
